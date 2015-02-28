@@ -20,8 +20,6 @@ package matchhead;
 
 import java.net.MalformedURLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import matchhead.loader.FileLoadable;
 import matchhead.loader.FileLoader;
 import matchhead.matchmaker.MatchMaker;
@@ -35,49 +33,51 @@ import matchhead.prefilter.QueryPreFilterable;
 public class MatchHead {
 
     private static String query = "encapsulation";
-    
+
     public static void main(String[] args) throws MalformedURLException {
 
         /*
-        TO-DO: It's bad style to hardcode path info like this. We should
-        make a class that exposes this value as a constant. That way we can do 
-        something like new FileLoader(Config.MATCH_PHRASE_PATH);
+         TO-DO: It's bad style to hardcode path info like this. We should
+         make a class that exposes this value as a constant. That way we can do 
+         something like new FileLoader(Config.MATCH_PHRASE_PATH);
         
-        Dain: Go ahead and set that up. I would suggest making a Constants class
-        in the matchhead.cinfig package. Put one variable in there defined like
-        public static String MATCH_PHRASE_PATH (that's how we define constants
-        in Java.
+         Dain: Go ahead and set that up. I would suggest making a Constants class
+         in the matchhead.cinfig package. Put one variable in there defined like
+         public static String MATCH_PHRASE_PATH (that's how we define constants
+         in Java.
         
-        */
+         */
         FileLoadable loader = new FileLoader("src/matchhead/data/match-phrases.txt");
         List<Pageable> loadedPages = loader.getPages();
 
         // Run query through the pre filter
-        QueryPreFilterable preFilter = new QueryPreFilter(); 
+        QueryPreFilterable preFilter = new QueryPreFilter();
         try {
             query = preFilter.preFilter(query);
         } catch (QueryPreFilterException ex) {
             System.out.println(ex.getMessage());
             System.exit(0);
         }
-        
+
         // Create and populate a MatchMaker
         Matchable matchMaker = new MatchMaker();
-        for (Pageable page : loadedPages) {
+        loadedPages.stream().forEach((page) -> {
             matchMaker.addPage(page);
-        }
+        });
 
         // Now perform the search!
         try {
             List<Pageable> results = matchMaker.match(query);
-            for (Pageable page : results) {
+
+            results.stream().forEach((page) -> {
                 System.out.println("Match Found!");
                 System.out.println("Query: " + query + "\nMatched the following Page(s):");
                 System.out.println(page.toString());
                 System.out.println("");
-            }
+            });
+
         } catch (MatchNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
     }
-} 
+}

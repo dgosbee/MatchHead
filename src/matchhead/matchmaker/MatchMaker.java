@@ -41,16 +41,14 @@ public final class MatchMaker implements Matchable {
 
     private void doMatchRules(String query) {
         
-        for (Pageable page : pagesToSearch) {
-            for (String matchPhrase : page.getMatchPhrases()) {
-                
+        pagesToSearch.stream().forEach((page) -> {
+            page.getMatchPhrases().stream().forEach((matchPhrase) -> {
                 // Each match rule is defined as a private method.
                 // Perhaps refactor this part out to a MatchRule subsystem?
                 
                 matchLiteralRule(query, matchPhrase, page);
-
-            }
-        }
+            });
+        });
     }
 
     private void matchLiteralRule(String query, String matchPhrase, Pageable page) {

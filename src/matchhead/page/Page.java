@@ -75,7 +75,7 @@ public final class Page implements Pageable {
         int count = 0;
         for (String matchPhrase : this.matchPhrases) {
             sb.append("\n");
-            sb.append("\t"+(++count));
+            sb.append("\t").append(++count);
             sb.append(": ");
             sb.append("\"");
             sb.append(matchPhrase);

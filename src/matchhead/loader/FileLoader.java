@@ -36,10 +36,10 @@ import matchhead.page.Pageable;
 /**
  * Implementation of the FileLoadable interface.
  *
- * TO-DO: Implement better Error checking on parameters 
- * 
+ * TO-DO: Implement better Error checking on parameters
+ *
  * This implementation should not be considered stable yet!
- * 
+ *
  * @author shommel
  */
 public final class FileLoader implements FileLoadable {
@@ -75,23 +75,34 @@ public final class FileLoader implements FileLoadable {
     @Override
     public List<Pageable> getPages() {
 
-        // Convert each line of the file to a Page object
-        for (String line : this.matchPhrases) {
+        this.matchPhrases.stream().forEach((line) -> {
+            
             StringTokenizer st1 = new StringTokenizer(line, "@");
             String url = st1.nextToken();
+            
+            /*
+            The page could remain null if the URL is malformed. So make sure
+            to check for null throughout the remainder of this method.
+            */
             Pageable page = null;
+            
             try {
                 page = new Page(new URL(url));
             } catch (MalformedURLException ex) {
-                Logger.getLogger(FileLoader.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
             String allPhrases = st1.nextToken();
             StringTokenizer st2 = new StringTokenizer(allPhrases, ",");
-            while (st2.hasMoreTokens()) {
+            while (st2.hasMoreTokens() && (page != null)) {
                 page.addMatchPhrase(st2.nextToken());
             }
-            pages.add(page);
-        }
+
+            if (page != null) {
+                pages.add(page);
+            }
+            
+        });
+
         return pages;
     }
 }
