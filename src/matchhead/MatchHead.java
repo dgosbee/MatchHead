@@ -20,16 +20,21 @@ package matchhead;
 
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import matchhead.loader.FileLoadable;
 import matchhead.loader.FileLoader;
 import matchhead.matchmaker.MatchMaker;
 import matchhead.matchmaker.MatchNotFoundException;
 import matchhead.matchmaker.Matchable;
 import matchhead.page.Pageable;
+import matchhead.prefilter.QueryPreFilter;
+import matchhead.prefilter.QueryPreFilterException;
+import matchhead.prefilter.QueryPreFilterable;
 
 public class MatchHead {
 
-    private static String QUERY = "encapsulation";
+    private static String query = "encapsulation";
     
     public static void main(String[] args) throws MalformedURLException {
 
@@ -47,6 +52,15 @@ public class MatchHead {
         FileLoadable loader = new FileLoader("src/matchhead/data/match-phrases.txt");
         List<Pageable> loadedPages = loader.getPages();
 
+        // Run query through the pre filter
+        QueryPreFilterable preFilter = new QueryPreFilter(); 
+        try {
+            query = preFilter.preFilter(query);
+        } catch (QueryPreFilterException ex) {
+            System.out.println(ex.getMessage());
+            System.exit(0);
+        }
+        
         // Create and populate a MatchMaker
         Matchable matchMaker = new MatchMaker();
         for (Pageable page : loadedPages) {
@@ -55,10 +69,10 @@ public class MatchHead {
 
         // Now perform the search!
         try {
-            List<Pageable> results = matchMaker.match(QUERY);
+            List<Pageable> results = matchMaker.match(query);
             for (Pageable page : results) {
                 System.out.println("Match Found!");
-                System.out.println("Query: " + QUERY + "\nMatched the following Page(s):");
+                System.out.println("Query: " + query + "\nMatched the following Page(s):");
                 System.out.println(page.toString());
                 System.out.println("");
             }
