@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with SearchProto.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package matchhead.matchmaker;
 
 import java.util.ArrayList;
@@ -31,46 +30,34 @@ public final class MatchMaker implements Matchable {
     @Override
     public List<Pageable> match(String query) throws MatchNotFoundException {
         
-        /*
-        Force incoming query to lowercase. 
-        Is this efficient? Or should this be done some other way,
-        like in a regex that ignores case?
-        */
         query = query.toLowerCase();
+        doMatchRules(query);
         
-        preJDK8Match(query);
         if (matchResults.isEmpty()) {
             throw new MatchNotFoundException("Not results found for: " + query);
         }
         return matchResults;
     }
 
-    /*
-     * Old syntax (prior to JDK 8)
-     */
-    private void preJDK8Match(String query) {
+    private void doMatchRules(String query) {
+        
         for (Pageable page : pagesToSearch) {
             for (String matchPhrase : page.getMatchPhrases()) {
-                if (query.equals(matchPhrase)) {
-                    matchResults.add(page);
-                }
+                
+                // Each match rule is defined as a private method.
+                // Perhaps refactor this part out to a MatchRule subsystem?
+                
+                matchLiteralRule(query, matchPhrase, page);
+
             }
         }
     }
 
-    /*
-     * New syntax (JDK 8 and later). Uses lambda expressions, streams, and
-     * aggregate operations. For now this is not used, but it works. 
-     */
-    private void postJDK8Match(String query) {
-        pagesToSearch.stream().forEach((page) -> {
-            page.getMatchPhrases().stream()
-                    .filter((matchPhrase) -> 
-                            (query.equals(matchPhrase)))
-                    .forEach((_item) -> {
-                matchResults.add(page);
-            });
-        });
+    private void matchLiteralRule(String query, String matchPhrase, Pageable page) {
+        // Literal Match
+        if (query.equals(matchPhrase)) {
+            matchResults.add(page);
+        }
     }
 
     @Override
