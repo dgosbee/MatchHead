@@ -33,7 +33,17 @@ public class MatchHead {
     
     public static void main(String[] args) throws MalformedURLException {
 
-        // Load the pages to search from the file defined by args[0]
+        /*
+        TO-DO: It's bad style to hardcode path info like this. We should
+        make a class that exposes this value as a constant. That way we can do 
+        something like new FileLoader(Config.MATCH_PHRASE_PATH);
+        
+        Dain: Go ahead and set that up. I would suggest making a Constants class
+        in the matchhead.cinfig package. Put one variable in there defined like
+        public static String MATCH_PHRASE_PATH (that's how we define constants
+        in Java.
+        
+        */
         FileLoadable loader = new FileLoader("src/matchhead/data/match-phrases.txt");
         List<Pageable> loadedPages = loader.getPages();
 
