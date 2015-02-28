@@ -40,13 +40,6 @@ import matchhead.page.Pageable;
  * 
  * 3. More match rules TBD
  * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  * @author shommel
  */
 public interface Matchable {
