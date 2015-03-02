@@ -57,7 +57,6 @@ public final class Page implements Pageable {
 
     public void setMatchPhrases(List<String> matchPhrases) {
         this.matchPhrases = matchPhrases;
-        
     }
     
     @Override
