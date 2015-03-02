@@ -65,7 +65,7 @@ public class MatchHead {
     private static void init() {
 
         // Read match phrase data from match-phrases.txt
-        loader = new MatchDataFileLoader("src/matchhead/data/match-phrases.txt");
+        loader = new MatchDataFileLoader("src/matchhead/matchdata/match-phrases.txt");
         loadedPages = loader.getPages();
         preFilter = new QueryPreFilter();
         matchMaker = new MatchMaker();
