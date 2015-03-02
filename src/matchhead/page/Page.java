@@ -29,9 +29,9 @@ import java.util.List;
  * @author shommel
  */
 public final class Page implements Pageable {
-
+  
     private final URL url;
-    private final List<String> matchPhrases;
+    private List<String> matchPhrases;
 
     /**
      * Creates a new Page for the given URL. A java.net.URL object is required 
@@ -55,6 +55,11 @@ public final class Page implements Pageable {
         return matchPhrases;
     }
 
+    public void setMatchPhrases(List<String> matchPhrases) {
+        this.matchPhrases = matchPhrases;
+        
+    }
+    
     @Override
     public final void addMatchPhrase(String matchPhrase) {
         if (matchPhrase != null && !matchPhrase.equals("")) {
