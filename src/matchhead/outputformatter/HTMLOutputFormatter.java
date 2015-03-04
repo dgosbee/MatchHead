@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-
 public class HTMLOutputFormatter implements HTMLOutputFormatable {
 
     PrintWriter printWriter;
@@ -32,6 +31,7 @@ public class HTMLOutputFormatter implements HTMLOutputFormatable {
       printWriter = new PrintWriter(new File(outPath));   
     }
     
+    @Override
     public void close(){
         this.printWriter.close();
     }
