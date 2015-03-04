@@ -134,6 +134,6 @@ public class MatchHead {
      * Cleans up any resources, such as closing I/O streams.
      */
      private static void cleanup(){
-         htmlOut.close();
+         htmlOut.cleanupResources();
      }
 }

@@ -21,6 +21,9 @@ package matchhead.outputformatter;
 
 public interface HTMLOutputFormatable extends OutputFormatable {
 
-    public void close();
+    /**
+     * Cleans up any resources (such as I/O) after the HTML has finished writing.
+     */
+    public void cleanupResources();
 
 }

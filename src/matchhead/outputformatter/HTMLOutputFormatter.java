@@ -32,7 +32,7 @@ public class HTMLOutputFormatter implements HTMLOutputFormatable {
     }
     
     @Override
-    public void close(){
+    public void cleanupResources(){
         this.printWriter.close();
     }
    
