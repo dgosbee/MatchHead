@@ -51,6 +51,15 @@ public class MatchHead {
      * method will not exist. The various private processing methods defined
      * here will be pushed out to some other section of the framework. Details
      * are still TBD.
+     * 
+     * FYI: A Servlet's main entry point is:
+     * 
+     * public void service(ServletRequest request, ServletResponse response)
+	throws ServletException, java.io.IOException
+     * 
+     * You won't find that method in the code until we move this 
+     * out of a standalone application and into the Servlet framework.
+     * 
      */
     public static void main(String[] args) throws MalformedURLException {
         init();
