@@ -37,7 +37,7 @@ import matchhead.prefilter.QueryPreFilterable;
 
 public class MatchHead {
 
-    private static String query = "encapsulation";
+    private static String query = "the encapsulation"; // Simulates search query from user
     private static MatchDataFileLoadable loader;
     private static List<Pageable> loadedPages;
     private static QueryPreFilterable preFilter;
@@ -60,6 +60,7 @@ public class MatchHead {
      * You won't find that method in the code until we move this 
      * out of a standalone application and into the Servlet framework.
      * 
+     * @param args The command line arguments
      */
     public static void main(String[] args) throws MalformedURLException {
         init();
