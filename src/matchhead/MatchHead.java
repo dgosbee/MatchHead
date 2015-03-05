@@ -42,15 +42,15 @@ public class MatchHead {
     private static List<Pageable> loadedPages;
     private static QueryPreFilterable preFilter;
     private static Matchable matchMaker;
-    private static ConsoleOutputFormatable consoleOut;
     private static HTMLOutputFormatable htmlOut;
+    private static ConsoleOutputFormatable consoleOut; // ONLY USED IN DEVELOPMENT
 
     /**
-     * The application's main entry point. This entry point will change
-     * after the code is moved to a Servlet. In the final deployment 
-     * scenario, a main method will not exist. The various private 
-     * processing methods defined here will be pushed out to some other section
-     * of the framework. Details are still TBD.
+     * The application's main entry point. This entry point will change after
+     * the code is moved to a Servlet. In the final deployment scenario, a main
+     * method will not exist. The various private processing methods defined
+     * here will be pushed out to some other section of the framework. Details
+     * are still TBD.
      */
     public static void main(String[] args) throws MalformedURLException {
         init();
@@ -69,8 +69,8 @@ public class MatchHead {
         loadedPages = loader.getPages();
         preFilter = new QueryPreFilter();
         matchMaker = new MatchMaker();
-        consoleOut = new ConsoleOutputFormatter();
-        
+        consoleOut = new ConsoleOutputFormatter(); // ONLY USED IN DEVELOPMENT
+
         // Write results to results.html
         try {
             htmlOut = new HTMLOutputFormatter("src/matchhead/output/results.html");
@@ -105,24 +105,22 @@ public class MatchHead {
             List<Pageable> results = matchMaker.match(query);
 
             results.stream().forEach((page) -> {
-                
-                // Print results to the console
+
+                // Print results to the console (ONLY USED IN DEVELOPMENT)
                 consoleOut.formatOutput("Match Found!");
                 consoleOut.formatOutput("Query: " + query + "\nMatched the following Page(s):");
                 consoleOut.formatOutput(page.toString());
                 consoleOut.formatOutput("");
-                
-                // Print results to HTML
-                
+
+                // Print results to HTML (WILL EVENTUALLY BE OUTPUT TO THE SERVLET)
                 htmlOut.formatOutput("<H3>Match Found!</H3>");
                 htmlOut.formatOutput("<UL>");
                 htmlOut.formatOutput("<LI>Query: " + query);
                 htmlOut.formatOutput("<LI>");
-                htmlOut.formatOutput("<A HREF=\""+
-                        page.getURL()+"\">"+page.getURL()+"</A>");
+                htmlOut.formatOutput("<A HREF=\""
+                        + page.getURL() + "\">" + page.getURL() + "</A>");
                 htmlOut.formatOutput("</UL>");
-               
-                
+
             });
 
         } catch (MatchNotFoundException ex) {
@@ -133,7 +131,7 @@ public class MatchHead {
     /**
      * Cleans up any resources, such as closing I/O streams.
      */
-     private static void cleanup(){
-         htmlOut.cleanupResources();
-     }
+    private static void cleanup() {
+        htmlOut.cleanupResources();
+    }
 }

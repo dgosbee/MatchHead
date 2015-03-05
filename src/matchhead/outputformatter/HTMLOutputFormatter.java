@@ -33,6 +33,7 @@ public class HTMLOutputFormatter implements HTMLOutputFormatable {
     
     @Override
     public void cleanupResources(){
+        // Each PrintWriter should be explicitly closed when finished. (Good Style)
         this.printWriter.close();
     }
    
