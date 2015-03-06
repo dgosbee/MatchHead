@@ -21,6 +21,7 @@ package matchhead;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.Set;
 import matchhead.matchdataloader.MatchDataFileLoadable;
 import matchhead.matchdataloader.MatchDataFileLoader;
 import matchhead.matchmaker.MatchMaker;
@@ -37,7 +38,7 @@ import matchhead.prefilter.QueryPreFilterable;
 
 public class MatchHead {
 
-    private static String query = "the encapsulation"; // Simulates search query from user
+    private static String query = "object oriented technology"; // Simulates search query from user
     private static MatchDataFileLoadable loader;
     private static List<Pageable> loadedPages;
     private static QueryPreFilterable preFilter;
@@ -112,7 +113,7 @@ public class MatchHead {
      */
     private static void runSearch() {
         try {
-            List<Pageable> results = matchMaker.match(query);
+            Set<Pageable> results = matchMaker.match(query);
 
             results.stream().forEach((page) -> {
 

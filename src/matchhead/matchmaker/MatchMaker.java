@@ -29,16 +29,17 @@ import matchhead.page.Pageable;
 public final class MatchMaker implements Matchable {
 
     private final List<Pageable> pagesToSearch = new ArrayList<>();
-    private final List<Pageable> matchResults = new ArrayList<>();
+    private final Set<Pageable> matchResults = new HashSet<>();
 
     @Override
-    public List<Pageable> match(String query) throws MatchNotFoundException {
+    public Set<Pageable> match(String query) throws MatchNotFoundException {
 
         query = query.toLowerCase();
         performSearch(query);
 
         if (matchResults.isEmpty()) {
-            throw new MatchNotFoundException("No results found for: " + query);
+            throw new MatchNotFoundException("No results found for: \"" 
+                    + query+"\"");
         }
         return matchResults;
     }
@@ -80,7 +81,7 @@ public final class MatchMaker implements Matchable {
      */
     private void matchRule2(String query, String matchPhrase, Pageable page) {
         String[] commonWords = {"the", "be", "to", "and", "a", "that",
-            "it", "on", "as", "at", "an", "is"};
+            "it", "on", "as", "at", "an", "is","-"};
         Set<String> mySet = new HashSet<>(Arrays.asList(commonWords));
         StringTokenizer tokenizer = new StringTokenizer(query);
         StringBuilder builder = new StringBuilder();
@@ -92,6 +93,9 @@ public final class MatchMaker implements Matchable {
             }
         }
         query = builder.toString().trim();
+        System.out.print("\"");
+        System.out.print(query);
+        System.out.println("\"");
         matchRule1(query,matchPhrase,page);
     }
 

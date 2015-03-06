@@ -20,6 +20,7 @@
 package matchhead.matchmaker;
 
 import java.util.List;
+import java.util.Set;
 import matchhead.page.Pageable;
 
 /**
@@ -52,6 +53,6 @@ public interface Matchable {
      */
     public void addPage(Pageable page);
    
-    public List<Pageable> match(String query) throws MatchNotFoundException;
+    public Set<Pageable> match(String query) throws MatchNotFoundException;
         
 }
