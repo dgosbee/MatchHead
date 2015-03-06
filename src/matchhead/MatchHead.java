@@ -38,7 +38,7 @@ import matchhead.prefilter.QueryPreFilterable;
 
 public class MatchHead {
 
-    private static String query = "object oriented technology"; // Simulates search query from user
+    private static String query = "what is a class?"; // Simulates search query from user
     private static MatchDataFileLoadable loader;
     private static List<Pageable> loadedPages;
     private static QueryPreFilterable preFilter;

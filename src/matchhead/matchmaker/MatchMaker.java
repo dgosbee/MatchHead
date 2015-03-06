@@ -93,9 +93,6 @@ public final class MatchMaker implements Matchable {
             }
         }
         query = builder.toString().trim();
-        System.out.print("\"");
-        System.out.print(query);
-        System.out.println("\"");
         matchRule1(query,matchPhrase,page);
     }
 
