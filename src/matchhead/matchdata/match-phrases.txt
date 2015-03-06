@@ -1,2 +1,2 @@
-http://docs.oracle.com/javase/tutorial/java/concepts/object.html@what is an object?,object oriented technology,object-oriented technology,state and behavior,state,behavior,object state,object behavior,what are fields?,what are methods?,data encapsulation,encapsulation,information hiding,object communication
-http://docs.oracle.com/javase/tutorial/java/concepts/class.html@what is a class?
+http://docs.oracle.com/javase/tutorial/java/concepts/object.html@what is an object?,bicycle object,instantiation,object oriented technology,object-oriented technology,state and behavior,state,behavior,object state,object behavior,what are fields?,what are methods?,data encapsulation,encapsulation,information hiding,object communication
+http://docs.oracle.com/javase/tutorial/java/concepts/class.html@what is a class?,class of objects,bicycle class,class instantiation,instance,instantiation,instantiate a class,blueprint,implementation,new
