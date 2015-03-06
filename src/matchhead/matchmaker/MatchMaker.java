@@ -59,8 +59,7 @@ public final class MatchMaker implements Matchable {
                 is something to think about.
                 */
                 matchRule1(query, matchPhrase, page);
-                matchRule2(query, matchPhrase, page);
-                
+                matchRule2(query, matchPhrase, page);   
             });
         });
     }
@@ -84,10 +83,11 @@ public final class MatchMaker implements Matchable {
             "it", "on", "as", "at", "an", "is","-"};
         Set<String> mySet = new HashSet<>(Arrays.asList(commonWords));
         StringTokenizer tokenizer = new StringTokenizer(query);
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();    
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
-            if (!(mySet.contains(token))) {
+            // what
+            if (!(mySet.contains(token))) {     
                 builder.append(token);
                 builder.append(" ");
             }

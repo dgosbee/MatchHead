@@ -38,7 +38,7 @@ import matchhead.prefilter.QueryPreFilterable;
 
 public class MatchHead {
 
-    private static String query = "instantiation"; // Simulates search query from user
+    private static String query = "base class"; // Simulates search query from user
     private static MatchDataFileLoadable loader;
     private static List<Pageable> loadedPages;
     private static QueryPreFilterable preFilter;
@@ -104,7 +104,7 @@ public class MatchHead {
             query = preFilter.preFilter(query);
         } catch (QueryPreFilterException ex) {
             System.out.println(ex.getMessage());
-            System.exit(0);
+            System.exit(0); // probably change this
         }
     }
 
