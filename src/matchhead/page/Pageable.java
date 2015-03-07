@@ -19,10 +19,10 @@
 package matchhead.page;
 
 import java.net.URL;
-import java.util.List;
+import java.util.Set;
 
 /**
- * A page (as in, "web page") has a URL and a list of match phrases. Match
+ * A page (as in, "web page") has a URL and a Set of match phrases. Match
  * phrases are String objects, and represent the kind of phrase that an end-user
  * would be likely to search for. New match phrases can be added to the page
  * using the addMatchPhrase(String) method. The URL of the page itself must be
@@ -58,10 +58,19 @@ public interface Pageable {
      *
      * @return the list of match phrases
      */
-    public List<String> getMatchPhrases();
+    public Set<String> getMatchPhrases();
 
+     /**
+     *
+     * Gets the URL of this page.
+     *
+     * @return the URL of this page, as a String
+     */
+    public URL getURL();
+    
     /**
      * Adds a match phrase to the page.
+     * TBD: May move to constructor
      *
      * @param matchPhrase the match phrase to add
      */
@@ -69,16 +78,11 @@ public interface Pageable {
 
     /**
      * Adds the list of match phrases.
-     * 
+     * TBD: May move to constructor
+     *
      * @param matchPhrases 
      */
-    public void setMatchPhrases(List<String> matchPhrases);
+    public void setMatchPhrases(Set<String> matchPhrases);
 
-    /**
-     *
-     * Gets the URL of this page.
-     *
-     * @return the URL of this page, as a String
-     */
-    public URL getURL();
+   
 }

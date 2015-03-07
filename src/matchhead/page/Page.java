@@ -20,8 +20,8 @@
 package matchhead.page;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The Page class is an implementation of the Pageable interface. 
@@ -31,7 +31,7 @@ import java.util.List;
 public final class Page implements Pageable {
   
     private final URL url;
-    private List<String> matchPhrases;
+    private Set<String> matchPhrases;
 
     /**
      * Creates a new Page for the given URL. A java.net.URL object is required 
@@ -42,7 +42,7 @@ public final class Page implements Pageable {
      */
     public Page(URL url) {
         this.url = url;
-        this.matchPhrases = new ArrayList<>();
+        this.matchPhrases = new HashSet<>();
     }
 
     @Override
@@ -51,12 +51,12 @@ public final class Page implements Pageable {
     }
     
     @Override
-    public final List<String> getMatchPhrases() {
+    public final Set<String> getMatchPhrases() {
         return matchPhrases;
     }
 
     @Override
-    public void setMatchPhrases(List<String> matchPhrases) {
+    public void setMatchPhrases(Set<String> matchPhrases) {
         this.matchPhrases = matchPhrases;
     }
     
