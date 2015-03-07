@@ -28,7 +28,7 @@ import matchhead.webpage.WebPageable;
 
 public final class MatchMaker implements Matchable {
 
-    private final List<WebPageable> pagesToSearch = new ArrayList<>();
+    private final List<WebPageable> webPagesToSearch = new ArrayList<>();
     private final Set<WebPageable> matchResults = new HashSet<>();
 
     @Override
@@ -38,40 +38,29 @@ public final class MatchMaker implements Matchable {
         performSearch(query);
 
         if (matchResults.isEmpty()) {
-            throw new MatchNotFoundException("No results found for: \"" 
-                    + query+"\"");
+            throw new MatchNotFoundException("No results found for: \""
+                    + query + "\"");
         }
         return matchResults;
     }
 
     private void performSearch(String query) {
-        pagesToSearch.stream().forEach((page) -> {
-            page.getMatchPhrases().stream().forEach((matchPhrase) -> {
-                
-                /*
-                For now, match rules are coded as matchRule1, matchRule2, etc.
-                Each new rule is added to the chain in its own method following
-                that naming convention. TBD: Is this the most intuitive way to
-                support rule chaining in the long term? Probably not, because 
-                if there are lots of rules, we will need some kind of reference 
-                chart describing what each one is for. Or maybe the javadoc comment
-                on each method is enough? Will leave this as-is for now, but it 
-                is something to think about.
-                */
-                matchRule1(query, matchPhrase, page);
-                matchRule2(query, matchPhrase, page);   
-            });
-        });
+        for (WebPageable page : webPagesToSearch) {            
+             matchRule1(query,page);
+            for(String matchPhrase : page.getMatchPhrases()){   
+                matchRule2(query,matchPhrase,page);
+            }
+        }
     }
 
     /**
      * Performs a literal match. Here the incoming search query is matched
      * exactly as-is against the target match phrase.
      */
-    private void matchRule1(String query, String matchPhrase, WebPageable page) {
-        if (query.equals(matchPhrase)) {
-            matchResults.add(page);
-        }
+    private void matchRule1(String query, WebPageable page) {
+       if(page.getMatchPhrases().contains(query)){
+       this.matchResults.add(page);
+       }
     }
 
     /**
@@ -80,20 +69,20 @@ public final class MatchMaker implements Matchable {
      */
     private void matchRule2(String query, String matchPhrase, WebPageable page) {
         String[] commonWords = {"the", "be", "to", "and", "a", "that",
-            "it", "on", "as", "at", "an", "is","-"};
+            "it", "on", "as", "at", "an", "is", "-"};
         Set<String> mySet = new HashSet<>(Arrays.asList(commonWords));
         StringTokenizer tokenizer = new StringTokenizer(query);
-        StringBuilder builder = new StringBuilder();    
+        StringBuilder builder = new StringBuilder();
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
             // what
-            if (!(mySet.contains(token))) {     
+            if (!(mySet.contains(token))) {
                 builder.append(token);
                 builder.append(" ");
             }
         }
         query = builder.toString().trim();
-        matchRule1(query,matchPhrase,page);
+        matchRule1(query,page);
     }
 
     @Override
@@ -103,6 +92,6 @@ public final class MatchMaker implements Matchable {
                     + " Thrown by: "
                     + this.getClass().getName());
         }
-        pagesToSearch.add(page);
+        webPagesToSearch.add(page);
     }
 }

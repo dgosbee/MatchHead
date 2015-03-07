@@ -27,12 +27,12 @@ import java.util.Set;
  * The WebPage class is an implementation of the WebPageable interface. 
  * 
  * @author shommel
- * @author 
+ * @author dgosbee
  */
 public final class WebPage implements WebPageable {
   
     private final URL url;
-    private Set<String> matchPhrases;
+    private final Set<String> matchPhrases;
 
     /**
      * Creates a new Page for the given URL. A java.net.URL object is required 
@@ -41,9 +41,9 @@ public final class WebPage implements WebPageable {
      * 
      * @param url 
      */
-    public WebPage(URL url) {
+    public WebPage(URL url, Set<String> matchPhrases) {
         this.url = url;
-        this.matchPhrases = new HashSet<>();
+        this.matchPhrases = matchPhrases;  
     }
 
     @Override
@@ -54,18 +54,6 @@ public final class WebPage implements WebPageable {
     @Override
     public final Set<String> getMatchPhrases() {
         return matchPhrases;
-    }
-
-    @Override
-    public void setMatchPhrases(Set<String> matchPhrases) {
-        this.matchPhrases = matchPhrases;
-    }
-    
-    @Override
-    public final void addMatchPhrase(String matchPhrase) {
-        if (matchPhrase != null && !matchPhrase.equals("")) {
-            this.matchPhrases.add(matchPhrase);
-        }
     }
 
     @Override

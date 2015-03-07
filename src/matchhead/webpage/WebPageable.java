@@ -68,22 +68,5 @@ public interface WebPageable {
      * @return the URL of this page, as a String
      */
     public URL getURL();
-    
-    /**
-     * Adds a match phrase to the page.
-     * TBD: May move to constructor
-     *
-     * @param matchPhrase the match phrase to add
-     */
-    public void addMatchPhrase(String matchPhrase);
-
-    /**
-     * Adds the list of match phrases.
-     * TBD: May move to constructor
-     *
-     * @param matchPhrases 
-     */
-    public void setMatchPhrases(Set<String> matchPhrases);
-
-   
+       
 }

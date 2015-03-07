@@ -26,7 +26,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +38,15 @@ import matchhead.webpage.WebPageable;
 /**
  * Implementation of the MatchPhraseDataFileLoadable interface.
  *
+ * 
+ * 1. open the match-phrases.txt file for reading
+ * 2. read each line from the file into memory
+ * 3. parse out URL text (up to @ sign) 
+ * 4. grab the entire keyword list: "object,class,blah,blah"
+ * 5. parse the key phrases from comma-separated list above
+ * 6. create Java objects with this data
+ * 7. create WebPage objects; store in list of web pages
+ * 
  * TO-DO: Implement better Error checking on parameters
  *
  * This implementation should not be considered stable yet!
@@ -45,15 +56,24 @@ import matchhead.webpage.WebPageable;
 public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoadable {
 
     private String path;
-    private List<String> matchPhrases = new ArrayList<>(); // raw file data
-    private List<WebPageable> pages = new ArrayList<>(); // constructed pages
+    // private List<String> matchPhrases = new ArrayList<>(); 
+    private List<WebPageable> webPages = new ArrayList<>(); 
 
     public MatchPhraseDataFileLoader(String path) {
         this.path = path;
+        List<String> linesRead = null;
         try {
-            readLinesFromInputFile(new File(path));
+            linesRead = readLinesFromInputFile(new File(path));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchPhraseDataFileLoader
+                    .class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        if(linesRead!=null){
+            parseMatchPhrases(linesRead);
+        }else{
+            System.out.println("Problem parsing lines from match-phrases.txt!");
+            System.exit(0);
         }
     }
 
@@ -66,56 +86,48 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         try {
+            // Read each line from the text file
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
+            // The entire file has been read by this point
+            
         } catch (IOException ex) {
             Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.matchPhrases = lines;
-        return this.matchPhrases;
+        return lines;
     }
 
     @Override
     public List<WebPageable> getPages() {
-
-        parseMatchPhrases();
-
-        return pages;
+        return webPages;
     }
-
-    /*
-     Parse entries from each line.
-     Construct WebPage objects and return as a list.
-     */
-    private void parseMatchPhrases() {
-
-        this.matchPhrases.stream().forEach((line) -> {
-
-            // Parse before and after @ sign
+    
+    private void parseMatchPhrases(List<String> lines) {
+  
+        lines.stream().forEach((line) -> {
+   
             StringTokenizer st1 = new StringTokenizer(line, "@");
-            String url = st1.nextToken();
-
-            /*
-             The page could remain null if the URL is malformed. So make sure
-             to check for null throughout the remainder of this method.
-             */
-            WebPageable page = null;
-
+            URL url = null;
+  
             try {
-                page = new WebPage(new URL(url));
+                url = new URL(st1.nextToken()); // Everything before @
             } catch (MalformedURLException ex) {
-                System.out.println(ex.getMessage());
+                Logger.getLogger(MatchPhraseDataFileLoader
+                        .class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
-            String allPhrases = st1.nextToken();
-            StringTokenizer st2 = new StringTokenizer(allPhrases, ",");
-            while (st2.hasMoreTokens() && (page != null)) {
-                page.addMatchPhrase(st2.nextToken());
+            
+            String everythingElse = st1.nextToken(); // Everything else after @
+            Set<String> parsedMatchPhrases = new HashSet<>();
+            StringTokenizer st2 = new StringTokenizer(everythingElse,",");
+ 
+            while(st2.hasMoreTokens()){            
+                parsedMatchPhrases.add(st2.nextToken());
             }
-
-            if (page != null) {
-                pages.add(page);
-            }
+         
+            WebPageable webPage = new WebPage(url,parsedMatchPhrases);
+            this.webPages.add(webPage);      
         });
     }
 }
