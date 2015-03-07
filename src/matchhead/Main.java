@@ -38,7 +38,10 @@ import matchhead.prefilter.QueryPreFilterable;
 
 public class Main {
 
-    private static String query = "what are packages?"; // Simulates search query from user
+    // Simulate incoming query from web browser
+    private static String query = "implementation";
+
+    // Define the main players in this system
     private static MatchPhraseDataFileLoadable loader;
     private static List<Pageable> loadedPages;
     private static QueryPreFilterable preFilter;
@@ -52,15 +55,15 @@ public class Main {
      * method will not exist. The various private processing methods defined
      * here will be pushed out to some other section of the framework. Details
      * are still TBD.
-     * 
+     *
      * FYI: A Servlet's main entry point is:
-     * 
+     *
      * public void service(ServletRequest request, ServletResponse response)
-	throws ServletException, java.io.IOException
-     * 
-     * You won't find that method in the code until we move this 
-     * out of a standalone application and into the Servlet framework.
-     * 
+     * throws ServletException, java.io.IOException
+     *
+     * You won't find that method in the code until we move this out of a
+     * standalone application and into the Servlet framework.
+     *
      * @param args The command line arguments
      */
     public static void main(String[] args) throws MalformedURLException {

@@ -51,41 +51,57 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
     public MatchPhraseDataFileLoader(String path) {
         this.path = path;
         try {
-            loadMatchPhrases(new File(path));
+            readLinesFromInputFile(new File(path));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private List<String> loadMatchPhrases(File file) throws FileNotFoundException {
-        List<String> results = new ArrayList<>();
+    /**
+     * Reads all lines from match-phrases.txt. Stores each line as an entry in a
+     * List<String>, then returns the list.
+     */
+    private List<String> readLinesFromInputFile(File file) throws FileNotFoundException {
+        List<String> lines = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
         try {
             while ((line = br.readLine()) != null) {
-                results.add(line);
+                lines.add(line);
             }
         } catch (IOException ex) {
             Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.matchPhrases = results;
+        this.matchPhrases = lines;
         return this.matchPhrases;
     }
 
     @Override
     public List<Pageable> getPages() {
 
+        parseMatchPhrases();
+
+        return pages;
+    }
+
+    /*
+     Parse entries from each line.
+     Construct Page objects and return as a list.
+     */
+    private void parseMatchPhrases() {
+
         this.matchPhrases.stream().forEach((line) -> {
-            
+
+            // Parse before and after @ sign
             StringTokenizer st1 = new StringTokenizer(line, "@");
             String url = st1.nextToken();
-            
+
             /*
-            The page could remain null if the URL is malformed. So make sure
-            to check for null throughout the remainder of this method.
-            */
+             The page could remain null if the URL is malformed. So make sure
+             to check for null throughout the remainder of this method.
+             */
             Pageable page = null;
-            
+
             try {
                 page = new Page(new URL(url));
             } catch (MalformedURLException ex) {
@@ -100,9 +116,6 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
             if (page != null) {
                 pages.add(page);
             }
-            
         });
-
-        return pages;
     }
 }
