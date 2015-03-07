@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MatchHead.  If not, see <http://www.gnu.org/licenses/>.
  */
-package matchhead.matchdataloader;
+package matchhead.matchphrasedataloader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,7 +34,7 @@ import matchhead.page.Page;
 import matchhead.page.Pageable;
 
 /**
- * Implementation of the MatchDataFileLoadable interface.
+ * Implementation of the MatchPhraseDataFileLoadable interface.
  *
  * TO-DO: Implement better Error checking on parameters
  *
@@ -42,18 +42,18 @@ import matchhead.page.Pageable;
  *
  * @author shommel
  */
-public final class MatchDataFileLoader implements MatchDataFileLoadable {
+public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoadable {
 
     private String path;
     private List<String> matchPhrases = new ArrayList<>(); // raw file data
     private List<Pageable> pages = new ArrayList<>(); // constructed pages
 
-    public MatchDataFileLoader(String path) {
+    public MatchPhraseDataFileLoader(String path) {
         this.path = path;
         try {
             loadMatchPhrases(new File(path));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MatchDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -66,7 +66,7 @@ public final class MatchDataFileLoader implements MatchDataFileLoadable {
                 results.add(line);
             }
         } catch (IOException ex) {
-            Logger.getLogger(MatchDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.matchPhrases = results;
         return this.matchPhrases;

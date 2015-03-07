@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MatchHead.  If not, see <http://www.gnu.org/licenses/>.
  */
-package matchhead.matchdataloader;
+package matchhead.matchphrasedataloader;
 
 import java.util.List;
 import matchhead.page.Pageable;
@@ -29,7 +29,7 @@ import matchhead.page.Pageable;
  * @author shommel
  */
 
-public interface MatchDataFileLoadable {
+public interface MatchPhraseDataFileLoadable {
    
    /**
     * Gets the list of pages to search. The Pageable objects stored in this List
