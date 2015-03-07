@@ -39,7 +39,7 @@ import matchhead.prefilter.QueryPreFilterable;
 public class Main {
 
     // Simulate incoming query from web browser
-    private static String query = "object";
+    private static String query = "implementation";
 
     // Define the main players in this system
     private static MatchPhraseLoadable loader;

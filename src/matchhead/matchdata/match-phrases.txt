@@ -1,6 +1,78 @@
-http://docs.oracle.com/javase/tutorial/java/concepts/object.html@object,new,instance,object,instantiation,object oriented technology,state,behavior,field,method,data encapsulation,encapsulation,information hiding,object communication
-http://docs.oracle.com/javase/tutorial/java/concepts/class.html@class,class of objects,bicycle class,class instantiation,instance,instantiation,instantiate a class,blueprint,implementation,new
-http://docs.oracle.com/javase/tutorial/java/concepts/inheritance.html@subclass,subclasses,subclass syntax,superclass,parent class,base class,inheritance,inherit,inheriting from a superclass,inherit from parent class,extends
-http://docs.oracle.com/javase/tutorial/java/concepts/interface.html@what is an interface?,interface,empty methods,abstract methods,implement,implement interface,implementation,implements,implementing an interface,contract
-http://docs.oracle.com/javase/tutorial/java/concepts/package.html@package,namespace,organization,source code organization,organize source files
-http://docs.oracle.com/javase/tutorial/java/nu tsandbolts/variables.html@variable,instance variable,class variable,non-static field,static field,local variable,parameter,naming,naming convention
+[BEGIN]
+[URL]http://docs.oracle.com/javase/tutorial/java/concepts/object.html
+[MP]object
+[MP]new
+[MP]instance
+[MP]implementation
+[MP]instantiation
+[MP]object oriented technology
+[MP]state
+[MP]behavior
+[MP]field
+[MP]method
+[MP]data encapsulation
+[MP]encapsulation
+[MP]information hiding
+[MP]object communication
+[END]
+[BEGIN]
+[URL]http://docs.oracle.com/javase/tutorial/java/concepts/class.html
+[MP]class
+[MP]class of objects
+[MP]bicycle class
+[MP]class instantiation
+[MP]instance
+[MP]instantiation
+[MP]instantiate a class
+[MP]blueprint
+[MP]implementation
+[MP]new
+[END]
+[BEGIN]
+[URL]http://docs.oracle.com/javase/tutorial/java/concepts/inheritance.html
+[MP]subclass
+[MP]subclasses
+[MP]subclass syntax
+[MP]superclass
+[MP]parent class
+[MP]base class
+[MP]inheritance
+[MP]inherit
+[MP]inheriting from a superclass
+[MP]inherit from parent class
+[MP]extends
+[MP]implementation
+[END]
+[BEGIN]
+[URL]http://docs.oracle.com/javase/tutorial/java/concepts/interface.html
+[MP]what is an interface?
+[MP]interface
+[MP]empty methods
+[MP]abstract methods
+[MP]implement
+[MP]implement interface
+[MP]implementation
+[MP]implements
+[MP]implementing an interface
+[MP]contract
+[END]
+[BEGIN]
+[URL]http://docs.oracle.com/javase/tutorial/java/concepts/package.html
+[MP]package
+[MP]namespace
+[MP]organization
+[MP]source code organization
+[MP]organize source files
+[END]
+[BEGIN]
+[URL]http://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html
+[MP]variable
+[MP]instance variable
+[MP]class variable
+[MP]non-static field
+[MP]static field
+[MP]local variable
+[MP]parameter
+[MP]naming
+[MP]naming convention
+[END]
