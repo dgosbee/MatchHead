@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import matchhead.page.Page;
-import matchhead.page.Pageable;
+import matchhead.webpage.WebPage;
+import matchhead.webpage.WebPageable;
 
 /**
  * Implementation of the MatchPhraseDataFileLoadable interface.
@@ -46,7 +46,7 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
 
     private String path;
     private List<String> matchPhrases = new ArrayList<>(); // raw file data
-    private List<Pageable> pages = new ArrayList<>(); // constructed pages
+    private List<WebPageable> pages = new ArrayList<>(); // constructed pages
 
     public MatchPhraseDataFileLoader(String path) {
         this.path = path;
@@ -77,7 +77,7 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
     }
 
     @Override
-    public List<Pageable> getPages() {
+    public List<WebPageable> getPages() {
 
         parseMatchPhrases();
 
@@ -86,7 +86,7 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
 
     /*
      Parse entries from each line.
-     Construct Page objects and return as a list.
+     Construct WebPage objects and return as a list.
      */
     private void parseMatchPhrases() {
 
@@ -100,10 +100,10 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
              The page could remain null if the URL is malformed. So make sure
              to check for null throughout the remainder of this method.
              */
-            Pageable page = null;
+            WebPageable page = null;
 
             try {
-                page = new Page(new URL(url));
+                page = new WebPage(new URL(url));
             } catch (MalformedURLException ex) {
                 System.out.println(ex.getMessage());
             }

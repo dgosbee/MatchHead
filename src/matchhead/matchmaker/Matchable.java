@@ -21,7 +21,7 @@ package matchhead.matchmaker;
 
 import java.util.List;
 import java.util.Set;
-import matchhead.page.Pageable;
+import matchhead.webpage.WebPageable;
 
 /**
  * Specifies the behavior of the system's MatchMaker. The default 
@@ -51,8 +51,8 @@ public interface Matchable {
      * 
      * @param page The page to add 
      */
-    public void addPage(Pageable page);
+    public void addPage(WebPageable page);
    
-    public Set<Pageable> match(String query) throws MatchNotFoundException;
+    public Set<WebPageable> match(String query) throws MatchNotFoundException;
         
 }

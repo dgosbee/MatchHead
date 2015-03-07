@@ -31,7 +31,7 @@ import matchhead.outputformatter.ConsoleOutputFormatable;
 import matchhead.outputformatter.ConsoleOutputFormatter;
 import matchhead.outputformatter.HTMLOutputFormatable;
 import matchhead.outputformatter.HTMLOutputFormatter;
-import matchhead.page.Pageable;
+import matchhead.webpage.WebPageable;
 import matchhead.prefilter.QueryPreFilter;
 import matchhead.prefilter.QueryPreFilterException;
 import matchhead.prefilter.QueryPreFilterable;
@@ -43,7 +43,7 @@ public class Main {
 
     // Define the main players in this system
     private static MatchPhraseDataFileLoadable loader;
-    private static List<Pageable> loadedPages;
+    private static List<WebPageable> loadedPages;
     private static QueryPreFilterable preFilter;
     private static Matchable matchMaker;
     private static HTMLOutputFormatable htmlOut;
@@ -94,7 +94,7 @@ public class Main {
         }
 
         //. Populate the match maker
-        for (Pageable page : loadedPages) {
+        for (WebPageable page : loadedPages) {
             matchMaker.addPage(page);
         }
     }
@@ -116,7 +116,7 @@ public class Main {
      */
     private static void runSearch() {
         try {
-            Set<Pageable> results = matchMaker.match(query);
+            Set<WebPageable> results = matchMaker.match(query);
 
             results.stream().forEach((page) -> {
 

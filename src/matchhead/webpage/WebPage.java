@@ -17,18 +17,19 @@
  * along with MatchHead.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package matchhead.page;
+package matchhead.webpage;
 
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The Page class is an implementation of the Pageable interface. 
+ * The WebPage class is an implementation of the WebPageable interface. 
  * 
  * @author shommel
+ * @author 
  */
-public final class Page implements Pageable {
+public final class WebPage implements WebPageable {
   
     private final URL url;
     private Set<String> matchPhrases;
@@ -40,7 +41,7 @@ public final class Page implements Pageable {
      * 
      * @param url 
      */
-    public Page(URL url) {
+    public WebPage(URL url) {
         this.url = url;
         this.matchPhrases = new HashSet<>();
     }

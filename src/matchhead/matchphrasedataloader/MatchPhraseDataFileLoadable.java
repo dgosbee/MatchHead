@@ -19,7 +19,7 @@
 package matchhead.matchphrasedataloader;
 
 import java.util.List;
-import matchhead.page.Pageable;
+import matchhead.webpage.WebPageable;
 
 /**
  * This interface specifies a mechanism for loading URL/MatchPhrase pairs
@@ -32,14 +32,14 @@ import matchhead.page.Pageable;
 public interface MatchPhraseDataFileLoadable {
    
    /**
-    * Gets the list of pages to search. The Pageable objects stored in this List
-    * will be constructed dynamically at runtime after parsing the URL/match phrase
-    * text file.
-    * 
-    * TO-DO: Specify any exceptions that should be thrown. Are there any?
+    * Gets the list of pages to search. The WebPageable objects stored in this List
+ will be constructed dynamically at runtime after parsing the URL/match phrase
+ text file.
+ 
+ TO-DO: Specify any exceptions that should be thrown. Are there any?
     * 
     * @return The list of pages to search
     */
-    public List<Pageable> getPages();
+    public List<WebPageable> getPages();
     
 }
