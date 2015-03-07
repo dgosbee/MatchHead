@@ -39,7 +39,7 @@ import matchhead.prefilter.QueryPreFilterable;
 public class Main {
 
     // Simulate incoming query from web browser
-    private static String query = "implementation";
+    private static String query = "dog";
 
     // Define the main players in this system
     private static MatchPhraseLoadable loader;
@@ -138,7 +138,9 @@ public class Main {
             });
 
         } catch (MatchNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            consoleOut.formatOutput(ex.getMessage());
+            htmlOut.formatOutput("<H1>Match Not Found</H1>");
+            htmlOut.formatOutput("<P>"+ex.getMessage()+"</P>");
         }
     }
 
