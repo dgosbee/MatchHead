@@ -19,12 +19,13 @@
 
 package matchhead.outputformatter;
 
-
-
 /**
- * CONSOLE OUTPUT IS ONLY USED DURING DEVELOPMENT.
- * THIS WILL BE REMOVED BEFORE DEPLOYING TO A SERVLET.
- * 
+ *
  * @author shommel
  */
-public interface ConsoleOutputFormatable extends OutputFormatable{}
+public abstract class OutputFormatter {
+    
+    public abstract void formatOutput(String output);
+    
+    
+}

@@ -24,15 +24,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
-import matchhead.webpage.WebPageable;
+import matchhead.webpage.WebPage;
 
-public final class MatchMaker implements Matchable {
+public final class MatchMaker {
 
-    private final List<WebPageable> webPagesToSearch = new ArrayList<>();
-    private final Set<WebPageable> matchResults = new HashSet<>();
+    private final List<WebPage> webPagesToSearch = new ArrayList<>();
+    private final Set<WebPage> matchResults = new HashSet<>();
 
-    @Override
-    public Set<WebPageable> match(String query) throws MatchNotFoundException {
+ 
+    public Set<WebPage> match(String query) throws MatchNotFoundException {
 
         query = query.toLowerCase();
         performSearch(query);
@@ -45,7 +45,7 @@ public final class MatchMaker implements Matchable {
     }
 
     private void performSearch(String query) {
-        for (WebPageable page : webPagesToSearch) {            
+        for (WebPage page : webPagesToSearch) {            
              matchRule1(query,page);
             for(String matchPhrase : page.getMatchPhrases()){   
                 matchRule2(query,matchPhrase,page);
@@ -57,7 +57,7 @@ public final class MatchMaker implements Matchable {
      * Performs a literal match. Here the incoming search query is matched
      * exactly as-is against the target match phrase.
      */
-    private void matchRule1(String query, WebPageable page) {
+    private void matchRule1(String query, WebPage page) {
        if(page.getMatchPhrases().contains(query)){
        this.matchResults.add(page);
        }
@@ -67,7 +67,7 @@ public final class MatchMaker implements Matchable {
      * Strips the query of known common words, then checks to see if the
      * stripped down query matches anything.
      */
-    private void matchRule2(String query, String matchPhrase, WebPageable page) {
+    private void matchRule2(String query, String matchPhrase,WebPage page) {
         String[] commonWords = {"the", "be", "to", "and", "a", "that",
             "it", "on", "as", "at", "an", "is", "-"};
         Set<String> mySet = new HashSet<>(Arrays.asList(commonWords));
@@ -85,8 +85,7 @@ public final class MatchMaker implements Matchable {
         matchRule1(query,page);
     }
 
-    @Override
-    public void addPage(WebPageable page) {
+    public void addPage(WebPage page) {
         if (page == null) {
             throw new NullPointerException("null Page passed to addPage(Page)!"
                     + " Thrown by: "

@@ -23,7 +23,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class HTMLOutputFormatter implements HTMLOutputFormatable {
+public class HTMLOutputFormatter extends OutputFormatter {
 
     PrintWriter printWriter;
     
@@ -31,13 +31,11 @@ public class HTMLOutputFormatter implements HTMLOutputFormatable {
       printWriter = new PrintWriter(new File(outPath));   
     }
     
-    @Override
     public void cleanupResources(){
         // Each PrintWriter should be explicitly closed when finished. (Good Style)
         this.printWriter.close();
     }
    
-    @Override
     public void formatOutput(String output) {
         if(printWriter!=null){
             printWriter.println(output);

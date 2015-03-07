@@ -29,7 +29,7 @@ import java.util.Set;
  * @author shommel
  * @author dgosbee
  */
-public final class WebPage implements WebPageable {
+public final class WebPage {
   
     private final URL url;
     private final Set<String> matchPhrases;
@@ -46,12 +46,10 @@ public final class WebPage implements WebPageable {
         this.matchPhrases = matchPhrases;  
     }
 
-    @Override
     public URL getURL(){
         return this.url;
     }
     
-    @Override
     public final Set<String> getMatchPhrases() {
         return matchPhrases;
     }

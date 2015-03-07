@@ -25,9 +25,8 @@ package matchhead.outputformatter;
  * 
  * @author shommel
  */
-public class ConsoleOutputFormatter implements ConsoleOutputFormatable {
+public class ConsoleOutputFormatter extends OutputFormatter {
 
-    @Override
     public void formatOutput(String output) {
         System.out.println(output);
     }

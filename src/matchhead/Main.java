@@ -22,32 +22,27 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Set;
-import matchhead.matchphraseloader.MatchPhraseLoadable;
 import matchhead.matchphraseloader.MatchPhraseLoader;
 import matchhead.matchmaker.MatchMaker;
 import matchhead.matchmaker.MatchNotFoundException;
-import matchhead.matchmaker.Matchable;
-import matchhead.outputformatter.ConsoleOutputFormatable;
 import matchhead.outputformatter.ConsoleOutputFormatter;
-import matchhead.outputformatter.HTMLOutputFormatable;
 import matchhead.outputformatter.HTMLOutputFormatter;
-import matchhead.webpage.WebPageable;
 import matchhead.prefilter.QueryPreFilter;
 import matchhead.prefilter.QueryPreFilterException;
-import matchhead.prefilter.QueryPreFilterable;
+import matchhead.webpage.WebPage;
 
 public class Main {
 
     // Simulate incoming query from web browser
-    private static String query = "dog";
+    private static String query = "implementation";
 
     // Define the main players in this system
-    private static MatchPhraseLoadable loader;
-    private static List<WebPageable> loadedPages;
-    private static QueryPreFilterable preFilter;
-    private static Matchable matchMaker;
-    private static HTMLOutputFormatable htmlOut;
-    private static ConsoleOutputFormatable consoleOut; // ONLY USED IN DEVELOPMENT
+    private static MatchPhraseLoader loader;
+    private static List<WebPage> loadedPages;
+    private static QueryPreFilter preFilter;
+    private static MatchMaker matchMaker;
+    private static HTMLOutputFormatter htmlOut;
+    private static ConsoleOutputFormatter consoleOut; // ONLY USED IN DEVELOPMENT
 
     /**
      * The application's main entry point. This entry point will change after
@@ -94,7 +89,7 @@ public class Main {
         }
 
         //. Populate the match maker
-        for (WebPageable page : loadedPages) {
+        for (WebPage page : loadedPages) {
             matchMaker.addPage(page);
         }
     }
@@ -116,7 +111,7 @@ public class Main {
      */
     private static void runSearch() {
         try {
-            Set<WebPageable> results = matchMaker.match(query);
+            Set<WebPage> results = matchMaker.match(query);
 
             results.stream().forEach((page) -> {
 

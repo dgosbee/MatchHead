@@ -33,7 +33,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import matchhead.webpage.WebPage;
-import matchhead.webpage.WebPageable;
 
 /**
  * 
@@ -41,11 +40,11 @@ import matchhead.webpage.WebPageable;
  * 
  * @author shommel
  */
-public final class MatchPhraseLoader implements MatchPhraseLoadable {
+public final class MatchPhraseLoader {
 
     private String path;
     // private List<String> matchPhrases = new ArrayList<>(); 
-    private List<WebPageable> webPages = new ArrayList<>();
+    private List<WebPage> webPages = new ArrayList<>();
 
     public MatchPhraseLoader(String path) {
         this.path = path;
@@ -55,7 +54,7 @@ public final class MatchPhraseLoader implements MatchPhraseLoadable {
     private void loadMatchPhrases(String path) {
         String url = null;
         Set<String> parsedMatchPhrases = null;
-        WebPageable webPage;
+        WebPage webPage;
         try {
             BufferedReader br
                     = new BufferedReader(new FileReader(new File(path)));
@@ -91,8 +90,7 @@ public final class MatchPhraseLoader implements MatchPhraseLoadable {
         }
     }
 
-    @Override
-    public List<WebPageable> getPages() {
+    public List<WebPage> getPages() {
         return webPages;
     }
 }
