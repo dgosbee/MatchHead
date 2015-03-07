@@ -22,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Set;
-import matchhead.matchphrasedataloader.MatchPhraseDataFileLoadable;
-import matchhead.matchphrasedataloader.MatchPhraseDataFileLoader;
+import matchhead.matchphraseloader.MatchPhraseLoadable;
+import matchhead.matchphraseloader.MatchPhraseLoader;
 import matchhead.matchmaker.MatchMaker;
 import matchhead.matchmaker.MatchNotFoundException;
 import matchhead.matchmaker.Matchable;
@@ -39,10 +39,10 @@ import matchhead.prefilter.QueryPreFilterable;
 public class Main {
 
     // Simulate incoming query from web browser
-    private static String query = "implementation";
+    private static String query = "object";
 
     // Define the main players in this system
-    private static MatchPhraseDataFileLoadable loader;
+    private static MatchPhraseLoadable loader;
     private static List<WebPageable> loadedPages;
     private static QueryPreFilterable preFilter;
     private static Matchable matchMaker;
@@ -79,7 +79,7 @@ public class Main {
     private static void init() {
 
         // Read match phrase data from match-phrases.txt
-        loader = new MatchPhraseDataFileLoader("src/matchhead/matchdata/match-phrases.txt");
+        loader = new MatchPhraseLoader("src/matchhead/matchdata/match-phrases.txt");
         loadedPages = loader.getPages();
         preFilter = new QueryPreFilter();
         matchMaker = new MatchMaker();

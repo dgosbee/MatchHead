@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MatchHead.  If not, see <http://www.gnu.org/licenses/>.
  */
-package matchhead.matchphrasedataloader;
+package matchhead.matchphraseloader;
 
 import java.util.List;
 import matchhead.webpage.WebPageable;
@@ -29,7 +29,7 @@ import matchhead.webpage.WebPageable;
  * @author shommel
  */
 
-public interface MatchPhraseDataFileLoadable {
+public interface MatchPhraseLoadable {
    
    /**
     * Gets the list of pages to search. The WebPageable objects stored in this List

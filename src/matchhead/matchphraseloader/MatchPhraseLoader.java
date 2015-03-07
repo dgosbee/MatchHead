@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MatchHead.  If not, see <http://www.gnu.org/licenses/>.
  */
-package matchhead.matchphrasedataloader;
+package matchhead.matchphraseloader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,7 +36,7 @@ import matchhead.webpage.WebPage;
 import matchhead.webpage.WebPageable;
 
 /**
- * Implementation of the MatchPhraseDataFileLoadable interface.
+ * Implementation of the MatchPhraseLoadable interface.
  *
  * 
  * 1. open the match-phrases.txt file for reading
@@ -53,19 +53,19 @@ import matchhead.webpage.WebPageable;
  *
  * @author shommel
  */
-public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoadable {
+public final class MatchPhraseLoader implements MatchPhraseLoadable {
 
     private String path;
     // private List<String> matchPhrases = new ArrayList<>(); 
     private List<WebPageable> webPages = new ArrayList<>(); 
 
-    public MatchPhraseDataFileLoader(String path) {
+    public MatchPhraseLoader(String path) {
         this.path = path;
         List<String> linesRead = null;
         try {
             linesRead = readLinesFromInputFile(new File(path));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MatchPhraseDataFileLoader
+            Logger.getLogger(MatchPhraseLoader
                     .class.getName())
                     .log(Level.SEVERE, null, ex);
         }
@@ -93,7 +93,7 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
             // The entire file has been read by this point
             
         } catch (IOException ex) {
-            Logger.getLogger(MatchPhraseDataFileLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MatchPhraseLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lines;
     }
@@ -113,7 +113,7 @@ public final class MatchPhraseDataFileLoader implements MatchPhraseDataFileLoada
             try {
                 url = new URL(st1.nextToken()); // Everything before @
             } catch (MalformedURLException ex) {
-                Logger.getLogger(MatchPhraseDataFileLoader
+                Logger.getLogger(MatchPhraseLoader
                         .class.getName())
                         .log(Level.SEVERE, null, ex);
             }
