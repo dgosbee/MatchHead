@@ -20,8 +20,7 @@
 package matchhead.prefilter;
 
 public final class QueryPreFilter {
-
- 
+    
     public String preFilter(String query) throws QueryPreFilterException {
 
         // Throw an exception if the query is not valid

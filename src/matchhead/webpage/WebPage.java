@@ -20,27 +20,13 @@
 package matchhead.webpage;
 
 import java.net.URL;
-import java.util.HashSet;
 import java.util.Set;
 
-/**
- * The WebPage class is an implementation of the WebPageable interface. 
- * 
- * @author shommel
- * @author dgosbee
- */
 public final class WebPage {
   
     private final URL url;
     private final Set<String> matchPhrases;
 
-    /**
-     * Creates a new Page for the given URL. A java.net.URL object is required 
-     * at the time of creation (instead of a String) because it enforces 
-     * certain rules, ensuring that the page will not contain a malformed URL.
-     * 
-     * @param url 
-     */
     public WebPage(URL url, Set<String> matchPhrases) {
         this.url = url;
         this.matchPhrases = matchPhrases;  

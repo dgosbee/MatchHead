@@ -19,19 +19,8 @@
 
 package matchhead.prefilter;
 
-/**
- * Represents a condition in which a particular String fails to 
- * pass the PreFilter.  
- * 
- * @author shommel
- */
-public class QueryPreFilterException extends Exception {
+public final class QueryPreFilterException extends Exception {
   
-    /**
-     * Creates a new exception with the specified message.
-     * 
-     * @param msg The message stored inside this exception.
-     */
     public QueryPreFilterException(String msg) {
         super(msg);
     }

@@ -23,9 +23,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class HTMLOutputFormatter extends OutputFormatter {
+public final class HTMLOutputFormatter extends OutputFormatter {
 
-    PrintWriter printWriter;
+    final PrintWriter printWriter;
     
     public HTMLOutputFormatter(String outPath) throws FileNotFoundException{
       printWriter = new PrintWriter(new File(outPath));   
@@ -36,6 +36,7 @@ public class HTMLOutputFormatter extends OutputFormatter {
         this.printWriter.close();
     }
    
+    @Override
     public void formatOutput(String output) {
         if(printWriter!=null){
             printWriter.println(output);

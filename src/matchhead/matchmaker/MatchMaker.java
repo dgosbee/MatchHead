@@ -53,20 +53,12 @@ public final class MatchMaker {
         }
     }
 
-    /**
-     * Performs a literal match. Here the incoming search query is matched
-     * exactly as-is against the target match phrase.
-     */
     private void matchRule1(String query, WebPage page) {
        if(page.getMatchPhrases().contains(query)){
        this.matchResults.add(page);
        }
     }
 
-    /**
-     * Strips the query of known common words, then checks to see if the
-     * stripped down query matches anything.
-     */
     private void matchRule2(String query, String matchPhrase,WebPage page) {
         String[] commonWords = {"the", "be", "to", "and", "a", "that",
             "it", "on", "as", "at", "an", "is", "-"};

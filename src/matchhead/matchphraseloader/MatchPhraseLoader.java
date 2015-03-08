@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,17 +33,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import matchhead.webpage.WebPage;
 
-/**
- * 
- * Loads the match phrase and url data for each page from match-phrases.txt
- * 
- * @author shommel
- */
+
 public final class MatchPhraseLoader {
 
-    private String path;
-    // private List<String> matchPhrases = new ArrayList<>(); 
-    private List<WebPage> webPages = new ArrayList<>();
+    private final String path;
+    private final List<WebPage> webPages = new ArrayList<>();
 
     public MatchPhraseLoader(String path) {
         this.path = path;

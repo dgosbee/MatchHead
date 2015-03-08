@@ -19,13 +19,7 @@
 
 package matchhead.outputformatter;
 
-/**
- * CONSOLE OUTPUT IS ONLY USED DURING DEVELOPMENT.
- * THIS WILL BE REMOVED BEFORE DEPLOYING TO A SERVLET.
- * 
- * @author shommel
- */
-public class ConsoleOutputFormatter extends OutputFormatter {
+public final class ConsoleOutputFormatter extends OutputFormatter {
 
     public void formatOutput(String output) {
         System.out.println(output);

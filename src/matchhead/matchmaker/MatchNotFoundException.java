@@ -19,14 +19,7 @@
 
 package matchhead.matchmaker;
 
-/**
- * Represents a condition where a search query does not match
- * any stored match phrases in any existing pages. Exceptions of this type
- * will be thrown by the MatchMaker if a match cannot be made.
- * 
- * @author production
- */
-public class MatchNotFoundException extends Exception {
+public final class MatchNotFoundException extends Exception {
 
     public MatchNotFoundException(String msg) {
         super(msg);
